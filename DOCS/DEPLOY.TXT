@@ -1,0 +1,123 @@
+mvn clean package -DskipTests
+
+ls target/
+
+docker build -t seemee-user-service .
+
+dir target\*.jar
+
+TROUBLESHOOTING:
+- If no JAR file found, Maven build failed
+- If JAR has different name, update Dockerfile COPY command
+- Alternative: Use direct Cloud Run deployment without Docker
+
+DIRECT DEPLOYMENT (RECOMMENDED):
+gcloud run deploy userservice --source . --region us-central1 --allow-unauthenticated --set-env-vars="FIREBASE_PROJECT_ID=seemee-user-service"
+
+COMPLETED:
+mvn clean package -DskipTests ✓
+JAR file found: userService-0.0.1-SNAPSHOT.jar ✓
+docker build -t seemee-user-service . (Ready to retry)
+
+NEXT STEPS:
+1. docker build -t seemee-user-service .
+2. docker tag seemee-user-service gcr.io/seemee-user-service/userservice:latest
+3. docker push gcr.io/seemee-user-service/userservice:latest
+4. gcloud run deploy userservice --image gcr.io/seemyee-user-service/userservice:latest --region us-central1 --allow-unauthenticated
+
+ACCOUNT ISSUE:
+Current account: sivakreddy.k7@gmail.com ❌ (Wrong account)
+Need to switch to correct account that owns seemee-user-service project
+
+SOLUTION STEPS:
+1. Check current account: gcloud auth list
+2. Login with correct account: gcloud auth login
+3. Set correct account as active: gcloud config set account YOUR_CORRECT_EMAIL
+4. Verify project access: gcloud projects list
+5. Retry deployment
+
+COMMANDS TO RUN:
+gcloud auth list
+gcloud auth login
+gcloud config set account YOUR_CORRECT_EMAIL@gmail.com
+gcloud config set project seemee-user-service
+
+BILLING ISSUE:
+ERROR: Billing account not found for project '447472898959' (seemee-user-service)
+Cloud Run requires billing to be enabled
+
+SOLUTION STEPS:
+1. Go to Google Cloud Console: https://console.cloud.google.com/
+2. Select project: seemee-user-service
+3. Go to Billing section
+4. Link a billing account (credit card required)
+5. Enable billing for the project
+
+ALTERNATIVE - Use Firebase Free Tier:
+1. Use Firebase Hosting instead of Cloud Run
+2. Or create new project with billing enabled
+3. Or use local deployment for testing
+
+NEXT ACTIONS:
+- Enable billing in Google Cloud Console
+- Or switch to Firebase Hosting deployment
+
+RENDER DEPLOYMENT (ALTERNATIVE TO FIREBASE):
+
+ADVANTAGES:
+- Free tier available
+- No billing required
+- Easy GitHub integration
+- Automatic deployments
+
+RENDER DEPLOYMENT STEPS:
+
+REMOVED:
+- Firebase configuration ✓
+- Firebase authentication filter ✓ 
+- Firebase dependencies ✓
+- Google Cloud deployment configs ✓
+
+ADDED:
+- Render configuration ✓
+- Health check endpoint ✓
+- Simplified security config ✓
+
+DEPLOYMENT:
+1. Push to GitHub:
+   git init
+   git add .
+   git commit -m "Configure for Render deployment"
+   git push origin main
+
+2. Deploy on Render:
+   - Go to render.com
+   - Connect GitHub repo
+   - Auto-deploy will start
+   - Access at: https://userservice-api.onrender.com
+
+ENDPOINTS:
+- Health: /health
+- Home: /
+- API: /api/*
+
+STEPS:
+1. Push code to GitHub repository
+2. Go to https://render.com/
+3. Sign up with GitHub account
+4. Click "New Web Service"
+5. Connect your GitHub repo
+6. Render will auto-detect Spring Boot
+7. Set environment variables if needed
+8. Deploy!
+
+RENDER SETTINGS:
+- Build Command: mvn clean package -DskipTests
+- Start Command: java -jar target/userService-0.0.1-SNAPSHOT.jar
+- Port: 8080
+
+FREE TIER LIMITS:
+- 750 hours/month
+- Sleeps after 15 minutes of inactivity
+- 512MB RAM
+
