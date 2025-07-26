@@ -1,12 +1,23 @@
+# Nixpacks configuration for Spring Boot
+# DO NOT USE DOCKER - Use Nixpacks only
+
 [providers]
 java = { version = "17" }
 
+[phases.setup]
+nixPkgs = ["jdk17", "maven"]
+
 [phases.build]
-cmds = ["./mvnw clean package -DskipTests"]
+cmds = [
+  "echo 'Building with Maven...'",
+  "./mvnw clean package -DskipTests",
+  "echo 'JAR built successfully'"
+]
 
 [phases.start]
-cmd = "java -jar target/userService-0.0.1-SNAPSHOT.jar"
+cmd = "java -Dserver.port=$PORT -jar target/userService-0.0.1-SNAPSHOT.jar"
 
 [variables]
 JAVA_VERSION = "17"
-MAVEN_OPTS = "-Xmx512m"
+MAVEN_OPTS = "-Xmx1024m"
+NIXPACKS_NO_DOCKER = "true"

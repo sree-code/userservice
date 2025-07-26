@@ -1,5 +1,5 @@
-# Railway Auto-Detection Configuration
-# Force Nixpacks to detect Java/Maven project
+# Railway Configuration - FORCE NO DOCKER
+# Explicitly disable Docker and force Nixpacks
 
 [build]
 builder = "NIXPACKS"
@@ -7,3 +7,7 @@ builder = "NIXPACKS"
 [deploy]
 healthcheckPath = "/api/user/health"
 restartPolicyType = "ON_FAILURE"
+
+# Explicitly disable Docker
+[variables]
+NIXPACKS_DOCKER = "false"

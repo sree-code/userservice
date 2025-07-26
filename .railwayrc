@@ -1,0 +1,12 @@
+# Railway - Do NOT use Docker
+# This file prevents Railway from using any Docker configuration
+
+# Force Nixpacks to detect Java/Spring Boot project
+NIXPACKS_BUILD_CMD=./mvnw clean package -DskipTests
+NIXPACKS_START_CMD=java -jar target/userService-0.0.1-SNAPSHOT.jar
+
+# Java version
+JAVA_VERSION=17
+
+# Explicitly disable Docker
+NO_DOCKER=true
