@@ -1,6 +1,5 @@
 package com.seemee.userservice.controller;
 
-
 import com.seemee.userservice.constants.SeeMeeConstants;
 import com.seemee.userservice.dto.AuthenticateUser;
 import com.seemee.userservice.dto.LoginResponse;
@@ -35,16 +34,16 @@ public class UserController {
     @PostMapping("/createProfile")
     public ResponseEntity<String> createUserProfile(@RequestBody User user) {
         userService.createUserProfile(user);
-        return ResponseEntity.ok("User created successfully");
+        return ResponseEntity.ok("User created successfully. A welcome email has been sent to " + user.getEmail());
     }
 
     @CrossOrigin(origins = SeeMeeConstants.FORNTEND_URL)
     @PostMapping("/updatePassword")
     public ResponseEntity<String> updatePassword(@RequestBody AuthenticateUser authenticateUser) {
         String response = userService.updatePassword(authenticateUser);
-        if(response.equalsIgnoreCase("success")){
+        if (response.equalsIgnoreCase("success")) {
             return ResponseEntity.ok("Password updated successfully");
-        }else{
+        } else {
             return ResponseEntity.ok("Password update failed, Please try again after sometime");
         }
     }
@@ -59,9 +58,8 @@ public class UserController {
     @CrossOrigin
     @PostMapping("/updateProfile")
     public ResponseEntity<String> updateProfile(@RequestBody User user) {
-//        userService.updateProfile(user);
+        // userService.updateProfile(user);
         return ResponseEntity.ok("Profile updated successfully");
     }
-
 
 }
