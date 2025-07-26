@@ -1,6 +1,9 @@
 # Railway Auto-Detection Configuration
-# Let Railway automatically detect and build Spring Boot
+# Force Nixpacks to detect Java/Maven project
+
+[build]
+builder = "NIXPACKS"
 
 [deploy]
-healthcheckPath = "/health"
+healthcheckPath = "/api/user/health"
 restartPolicyType = "ON_FAILURE"

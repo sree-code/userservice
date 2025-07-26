@@ -1,0 +1,12 @@
+[providers]
+java = { version = "17" }
+
+[phases.build]
+cmds = ["./mvnw clean package -DskipTests"]
+
+[phases.start]
+cmd = "java -jar target/userService-0.0.1-SNAPSHOT.jar"
+
+[variables]
+JAVA_VERSION = "17"
+MAVEN_OPTS = "-Xmx512m"
