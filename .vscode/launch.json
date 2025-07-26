@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "UserserviceApplication",
+      "request": "launch",
+      "mainClass": "com.seemee.userservice.UserserviceApplication",
+      "projectName": "userService"
+    },
+    {
+      "type": "java",
+      "name": "Launch UserserviceApplication",
+      "request": "launch",
+      "mainClass": "com.seemee.userservice.UserserviceApplication",
+      "projectName": "userservice",
+      "vmArgs": "-Dserver.address=0.0.0.0 -Dserver.port=8080 -Dspring.profiles.active=dev",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Launch UserserviceApplication - Local",
+      "request": "launch",
+      "mainClass": "com.seemee.userservice.UserserviceApplication",
+      "projectName": "userservice"
+    },
+    {
+      "type": "java",
+      "name": "Attach to Remote Java Application",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": "5005"
+    }
+  ]
+}

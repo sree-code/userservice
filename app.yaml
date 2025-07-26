@@ -3,7 +3,7 @@ runtime: java17
 
 env_variables:
   SPRING_PROFILES_ACTIVE: "prod"
-  FIREBASE_PROJECT_ID: "your-project-id"
+  FIREBASE_PROJECT_ID: "seemee-backend"
 
 automatic_scaling:
   min_instances: 1

@@ -1,0 +1,140 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven Clean Install",
+      "type": "shell",
+      "command": "./mvnw.cmd",
+      "args": ["clean", "install"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Spring Boot - Local Only",
+      "type": "shell",
+      "command": "./mvnw.cmd",
+      "args": ["spring-boot:run"],
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": "\\b\\B",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^.*Restarting due to",
+            "endsPattern": "^.*Started .* in .* seconds.*"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Run Spring Boot - Dev Mode (External Access)",
+      "type": "shell",
+      "command": "./mvnw.cmd",
+      "args": [
+        "spring-boot:run",
+        "-Dspring-boot.run.jvmArguments=-Dserver.address=0.0.0.0 -Dserver.port=8080 -Dspring.profiles.active=dev"
+      ],
+      "group": "build",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": "\\b\\B",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^.*Restarting due to",
+            "endsPattern": "^.*Started .* in .* seconds.*"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Run Spring Boot - Production Mode",
+      "type": "shell",
+      "command": "java",
+      "args": [
+        "-jar",
+        "-Dserver.address=0.0.0.0",
+        "-Dserver.port=8080",
+        "-Dspring.profiles.active=prod",
+        "target/userService-0.0.1-SNAPSHOT.jar"
+      ],
+      "group": "build",
+      "isBackground": true,
+      "dependsOn": "Maven Clean Install",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Stop Spring Boot Application",
+      "type": "shell",
+      "command": "taskkill",
+      "args": ["/F", "/IM", "java.exe", "/FI", "WINDOWTITLE eq *userservice*"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Check Running Java Processes",
+      "type": "shell",
+      "command": "netstat",
+      "args": ["-ano", "|", "findstr", ":8080"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}
