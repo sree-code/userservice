@@ -1,4 +1,4 @@
-# Ignore all Docker-related files
+# FORCE IGNORE ALL DOCKER FILES
 Dockerfile*
 .dockerignore
 docker-compose*
@@ -10,5 +10,8 @@ docker/
 target/*.jar
 !target/userService-0.0.1-SNAPSHOT.jar
 
-# Force Railway to use Nixpacks
+# Force Railway to use Nixpacks - CRITICAL
 .buildpacks
+
+# Ignore Docker from git history
+# Railway must use buildpacks only

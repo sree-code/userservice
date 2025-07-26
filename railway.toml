@@ -1,13 +1,17 @@
-# Railway Configuration - FORCE NO DOCKER
-# Explicitly disable Docker and force Nixpacks
+# Railway Configuration - DISABLE DOCKER COMPLETELY
+# Force Railway to use buildpacks only
 
 [build]
 builder = "NIXPACKS"
+buildCommand = "./mvnw clean package -DskipTests"
 
 [deploy]
+startCommand = "java -Dserver.port=$PORT -jar target/userService-0.0.1-SNAPSHOT.jar"
 healthcheckPath = "/api/user/health"
 restartPolicyType = "ON_FAILURE"
 
-# Explicitly disable Docker
+# Environment variables to disable Docker
 [variables]
 NIXPACKS_DOCKER = "false"
+DISABLE_DOCKER = "true"
+FORCE_BUILDPACK = "true"
