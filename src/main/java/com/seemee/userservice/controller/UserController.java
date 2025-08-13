@@ -2,7 +2,9 @@ package com.seemee.userservice.controller;
 
 import com.seemee.userservice.constants.SeeMeeConstants;
 import com.seemee.userservice.dto.AuthenticateUser;
+import com.seemee.userservice.dto.LoginRequest;
 import com.seemee.userservice.dto.LoginResponse;
+import com.seemee.userservice.dto.LogoutRequest;
 import com.seemee.userservice.model.User;
 import com.seemee.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,25 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+//    @CrossOrigin(origins = SeeMeeConstants.FRONTEND_LOCAL_URL)
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponse> authenticateUser(@RequestBody AuthenticateUser authenticateUser) {
+//        LoginResponse response = userService.authenticateUser(authenticateUser);
+//        return ResponseEntity.ok(response);
+//    }
+
     @CrossOrigin(origins = SeeMeeConstants.FRONTEND_LOCAL_URL)
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> authenticateUser(@RequestBody AuthenticateUser authenticateUser) {
-        LoginResponse response = userService.authenticateUser(authenticateUser);
+    public ResponseEntity<LoginResponse> authenticateUserWithLogging(@RequestBody LoginRequest loginRequest) {
+        LoginResponse response = userService.authenticateUserWithLogging(loginRequest);
         return ResponseEntity.ok(response);
+    }
+
+    @CrossOrigin(origins = SeeMeeConstants.FRONTEND_LOCAL_URL)
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser(@RequestBody LogoutRequest logoutRequest) {
+        userService.logoutUser(logoutRequest);
+        return ResponseEntity.ok("User logged out successfully");
     }
 
     @CrossOrigin(origins = SeeMeeConstants.FRONTEND_LOCAL_URL)

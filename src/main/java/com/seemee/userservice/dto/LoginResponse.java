@@ -12,4 +12,5 @@ public class LoginResponse {
     String role;
     User user;
     String token;
+    String sessionId;
 }
